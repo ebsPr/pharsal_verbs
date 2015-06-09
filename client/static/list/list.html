@@ -1,0 +1,22 @@
+<div ng-controller="ListController as listCtrl ">
+
+    <table class="table table-striped table-hover ">
+        <thead>
+            <tr>
+                <th>Verbo en Inglés</th>
+                <th>Traducción</th>
+                <th>Ejemplo Inglés</th>
+                <th>Ejemplo Español</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="v in pharsalVerb">
+                <td><span ng-bind="v.verb"></span></td>
+                <td ng-click="mostrarTraduccion(v)" ><span ng-bind="v.traduccion" ng-class="{'ng-show': v.mostrarTraduccion == 1 , 'ng-hide' : v.mostrarTraduccion != 1 }"></span></td>
+                <td  ng-click="mostrarEjemplo(v)"><span ng-bind="v.ejemplo" ng-class="{'ng-show': v.mostrarEjemplo == 1 , 'ng-hide' : v.mostrarEjemplo != 1 }"></span></td>
+                <td ng-click="mostrarEjemploTraducido(v)"><span ng-bind="v.ejemploTraducido"  ng-class="{'ng-show': v.mostrarEjemploTraducido == 1 , 'ng-hide' : v.mostrarEjemploTraducido != 1 }"></span></td>
+            </tr>
+        </tbody>
+
+    </table>
+</div>

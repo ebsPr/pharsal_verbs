@@ -1,0 +1,17 @@
+{
+  "name": "pharsal-verbs",
+  "version": "3.14.15",
+  "description": "application to learn pharsal verbs",
+  "main": "server.js",
+  "dependencies": {
+    "express": "^4.12.2",
+    "bower": "^1.3.1",
+    "random-js":"*",
+    "body-parser":"*",
+    "mongodb":"*",
+    "q":"*"
+  },
+  "scripts":{
+    "postinstall": "bower install"
+  }
+}

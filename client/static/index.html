@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html class="no-js" ng-app="pharsalVerbs">
+<html lang="es" style="position: relative;min-height: 100%;">
+
+<head>
+	<meta charset="utf-8">
+	<title>Learn Pharsal Verbs</title>
+	<meta name="description" content="Learn Pharsal Verbs">
+	<meta name="viewport" content="width=device-width">
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css" rel="stylesheet">
+
+	<link rel="stylesheet" href="/bower_components/bootstrap-material-design/dist/css/material-custom.css">
+
+
+
+
+
+</head>
+
+<body class="container">
+    <p>by Saida Balsells</p>
+    <div class="jumbotron">
+        <div class="container">
+            <h1>Aprende Pharsal Verbs</h1>
+            <p>Elije entre dos opciones, unos ejercicios aleatorios para ir aprendiendo o visualizar la lista completa de verbos</p>
+            <div class="btn-group btn-group-justified">
+                <a type="button" class="btn btn-material-purple" href="#/random.view">Modo Aleatorio</a>
+                <a type="button" class="btn btn-material-purple" href="#/list.view">Modo Lista</a>
+            </div>
+        </div>
+    </div>
+
+    <div  ng-view>
+    </div>
+</body>
+
+<script src="./bower_components/angular/angular.js"></script>
+<script src="./bower_components/angular-route/angular-route.js"></script>
+<script src="./bower_components/angular-resource/angular-resource.js"></script>
+<script src="./random/random.js"></script>
+<script src="./list/list.js"></script>
+<script src="app.js"></script>
+<script src="utils/restApi.js"></script>
+
+</html>
