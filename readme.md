@@ -11,6 +11,7 @@ ___
 To execute the aplication, execute inside client folder:
 1. npm install
 1. node server.js
+1. open web browser in localhost:3000
 
 ___
 
