@@ -5,13 +5,12 @@
 ___
 
 Inside the folder dump there is a dump of mongodb database. The database is called 'pharsalVerbs' and the collection is called 'verbs'.
-
 ___
 
 To execute the aplication, execute inside client folder:
-1.  npm install
-1.  node server.js
-1.  open web browser in localhost:3000
+1. npm install
+2. node server.js
+3. open web browser in localhost:3000
 
 ___
 
