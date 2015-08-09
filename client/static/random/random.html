@@ -1,4 +1,14 @@
-<div ng-controller="RandomController as randomCtrl" class="container">
+<div ng-controller="RandomController as randomCtrl" class="">
+
+    <div class="panel panel-default">
+        <div class="well bs-component">
+            <h4>
+            <p>Introduce en la caja de texto la traducción del verbo. </p>
+            <p>Para ver si es correcto o no pulsa la tecla intro.</p>
+            <p>Si quieres ver la solución pulsa el botón solución y para pasar el verbo pulsa siguiente</p>
+            </h4>
+        </div>
+    </div>
 
     <div class="row">
         <div class="col-lg-8">
@@ -9,38 +19,42 @@
                             <h1>Verbo a traducir</h1>
                                 </div>
                             <div class="col-lg-2">
-                               <h3> <span class="label label-success">Aciertos: {{aciertos}}</span></h3>
+                               <h3> <span class="label label-success">Aciertos: {{randomCtrl.aciertos}}</span></h3>
                             </div>
                             <div class="col-lg-2">
-                                <h3>  <span class="label label-danger">Fallos: {{fallos}}</span></h3>
+                                <h3>  <span class="label label-danger">Fallos: {{randomCtrl.fallos}}</span></h3>
                             </div>
                         </fieldset>
-                            <div class="form-group">
-                                <label class="col-lg-4 control-label"> {{pharsalVerb.verb}} </label>
-                                <div class="col-lg-6">
-                                    <input type="text" placeholder="Introducir solucion" class="form-control" ng-keyup="comprobarSolucion()" ng-model="inputVerb"/>
-                                </div>
-                                <div class="col-lg-1">
-                                    <span class="mdi-action-thumb-up mdi-material-green"  ng-show="solucionValida==1"></span>
-                                    <span class="mdi-action-thumb-down mdi-material-red"  ng-show="solucionValida==2"></span>
-                                </div>
+                        <div class="form-group">
+                            <label class="col-lg-4 control-label"> {{randomCtrl.pharsalVerb.verb}} </label>
+                            <div class="col-lg-6">
+                                <input type="text" placeholder="Introducir solucion" class="form-control" ng-keyup="randomCtrl.comprobarSolucion($event)" ng-model="randomCtrl.inputVerb"/>
                             </div>
+                            <div class="col-lg-1">
+                                <span class="mdi-action-thumb-up mdi-material-green"  ng-show="randomCtrl.solucionValida==1"></span>
+                                <span class="mdi-action-thumb-down mdi-material-red"  ng-show="randomCtrl.solucionValida==2"></span>
+                            </div>
+                        </div>
 
                 </form>
                 <br>
                 <div class="btn-group btn-group-justified">
-                    <a href="javascript:void(0)" class="btn btn-material-indigo" ng-click="nextVerb()">Siguiente<div class="ripple-wrapper"></div></a>
-                    <a href="javascript:void(0)" class="btn btn-material-indigo" ng-click="showAnswer()">Solución<div class="ripple-wrapper"></div></a>
+                    <a href="javascript:void(0)" class="btn btn-material-indigo" ng-click="randomCtrl.nextVerb()">Siguiente<div class="ripple-wrapper"></div></a>
+                    <a href="javascript:void(0)" class="btn btn-material-indigo" ng-click="randomCtrl.showAnswer(3)">Solución<div class="ripple-wrapper"></div></a>
                 </div>
             </div>
         </div>
         <div class="col-lg-4">
             <div class="well bs-component">
-                <h1>Solución: </h1>
-                <h3><p class="text-success">{{solucionAMostrar1}}<p></h3>
-                <p class="text-success">{{solucionAMostrar2}}<p>
-                <p class="text-success">{{solucionAMostrar3}}<p>
+                <h1>
+                        <span ng-show="randomCtrl.solucionValida == 1">Correcto! <img src="../img/Thumb-Up-icon.png" /></span>
+                       <span ng-show="randomCtrl.solucionValida == 2"> Incorrecto! <img src="../img/Thumb-Down-icon.png" /></span>
+                        <span ng-show="randomCtrl.solucionValida == 3">Solución: </span>
+                </h1>
 
+                <h3><p ng-class="{'text-success' : randomCtrl.solucionValida == 1 ,'text-danger': randomCtrl.solucionValida != 1 }">{{randomCtrl.solucionAMostrar1}}<p></h3>
+                <p ng-class="{'text-success' : randomCtrl.solucionValida == 1 ,'text-danger': randomCtrl.solucionValida != 1 }">{{randomCtrl.solucionAMostrar2}}<p>
+                <p ng-class="{'text-success' : randomCtrl.solucionValida == 1 ,'text-danger': randomCtrl.solucionValida != 1 }">{{randomCtrl.solucionAMostrar3}}<p>
             </div>
         </div>
     </div>

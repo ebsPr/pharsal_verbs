@@ -7,21 +7,23 @@ angular.module('listModule', ['ngRoute'])
             templateUrl: 'list/list.html',
             controller: 'ListController'
         });
-    }]).controller('ListController', ['$scope','$filter','$timeout','List',function($scope,$filter,$timeout,List) {
+    }]).controller('ListController', ['$filter','$timeout','List',function($filter,$timeout,List) {
 
-        $scope.pharsalVerb = null;
+        var vm = this;
+        
+        vm.pharsalVerb = null;
 
         List.selectAll(function(data){
-            $scope.pharsalVerb = data;
+            vm.pharsalVerb = data;
         })
 
-        $scope.mostrarTraduccion = function(v){
+        vm.mostrarTraduccion = function(v){
             v.mostrarTraduccion = 1;
         };
-        $scope.mostrarEjemplo = function(v){
+        vm.mostrarEjemplo = function(v){
             v.mostrarEjemplo = 1;
         };
-        $scope.mostrarEjemploTraducido = function(v){
+        vm.mostrarEjemploTraducido = function(v){
             v.mostrarEjemploTraducido = 1;
         };
     }]);

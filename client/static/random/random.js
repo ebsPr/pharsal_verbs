@@ -9,118 +9,77 @@ angular.module('randomModule', ['ngRoute'])
             templateUrl: 'random/random.html',
             controller: 'RandomController'
         });
-    }]).controller('RandomController', ['$scope','$filter','$timeout','Random',function($scope,$filter,$timeout,Random) {
+    }]).controller('RandomController', ['$filter','$timeout','Random','Assert',function($filter,$timeout,Random,Assert) {
 
+        var vm = this;
         // declaracion atributos
-        $scope.pharsalVerb = null;
-        $scope.inputVerb = null;
+       vm.pharsalVerb = null;
+       vm.inputVerb = null;
 
-        $scope.solucionAMostrar1 = null;
-        $scope.solucionAMostrar2 = null;
-        $scope.solucionAMostrar3 = null;
+       vm.solucionAMostrar1 = null;
+       vm.solucionAMostrar2 = null;
+       vm.solucionAMostrar3 = null;
 
 
-        $scope.solucionValida = 0;
+       vm.solucionValida = 0;
 
-        $scope.aciertos = 0;
-        $scope.fallos = 0;
+       vm.aciertos = 0;
+       vm.fallos = 0;
 
         // inicialización atributos
         Random.random(function (data) {
-            $scope.pharsalVerb = data;
+           vm.pharsalVerb = data;
         });
 
 
         // método que se ejecuta cuando se pulsa siguiente
-        $scope.nextVerb = function () {
-            $scope.reset()
+       vm.nextVerb = function () {
+           vm.reset()
             Random.random(function (data) {
-                $scope.pharsalVerb = data;
+               vm.pharsalVerb = data;
             });
         }
 
         // función que sirve para resetear el div de solución
-        $scope.reset = function () {
-            $scope.solucionAMostrar1 = null;
-            $scope.solucionAMostrar2 = null;
-            $scope.solucionAMostrar3 = null;
-            $scope.inputVerb = null;
-            $scope.solucionValida = 0;
+       vm.reset = function () {
+           vm.solucionAMostrar1 = null;
+           vm.solucionAMostrar2 = null;
+           vm.solucionAMostrar3 = null;
+           vm.inputVerb = null;
+           vm.solucionValida = 0;
         }
 
         // función que asigna las soluciones
-        $scope.showAnswer = function () {
-            console.log('showAnwser: '+$scope.solucionValida);
-            if ($scope.solucionValida != 1) {
-                $scope.fallos++;
+       vm.showAnswer = function (valor) {
+            console.log('showAnwser: '+this.solucionValida);
+            if (this.solucionValida != 1) {
+               vm.fallos++;
             }
-            $scope.solucionAMostrar1 = $scope.pharsalVerb.traduccion;
-            $scope.solucionAMostrar2 = $scope.pharsalVerb.ejemplo;
-            $scope.solucionAMostrar3 = $scope.pharsalVerb.ejemploTraducido;
+           vm.solucionAMostrar1 =vm.pharsalVerb.traduccion;
+           vm.solucionAMostrar2 =vm.pharsalVerb.ejemplo;
+           vm.solucionAMostrar3 =vm.pharsalVerb.ejemploTraducido;
+
+           this.solucionValida = valor;
         }
 
         // método que valida si lo introducido es correcto
-        $scope.comprobarSolucion = function () {
-            var correcto = $scope.compararValores($scope.pharsalVerb.traduccion, $scope.inputVerb);
-            console.log('IF: ' + correcto + "/"+$scope.solucionValida);
-            if ( correcto && $scope.solucionValida != 1 ) {
-                console.log('VALIDO');
-                $scope.aciertos++;
-                $scope.solucionValida=1;
-                $scope.showAnswer();
+       vm.comprobarSolucion = function ($event) {
+            if($event.keyCode == 13){
+                var correcto =Assert.assert(this.pharsalVerb.traduccion,vm.inputVerb);
+                console.log('IF: ' + correcto + "/"+this.solucionValida);
+                if ( correcto &&vm.solucionValida != 1 ) {
+                    console.log('VALIDO');
+                   vm.aciertos++;
+                   vm.solucionValida=1;
+                   vm.showAnswer(1);
 
-            } else if(!correcto && $scope.solucionValida != 1){
-                console.log('INCORRECTO');
-                $scope.solucionValida = 2;
-
-            }
-        }
-
-        $scope.compararValores = function (valorOk, valorInput) {
-
-            var resultado = false;
-
-            // pasar todos los valores a upper
-            var _valorOk = $filter('uppercase')(valorOk);
-            var _valorInput = $filter('uppercase')(valorInput)
-
-            // para comprobamos si tienen espacios
-            var ok_split = _valorOk.split(" ");
-            var input_split = _valorInput.split(" ");
-
-            console.log(ok_split.length  +"/"+input_split.length);
-            // si la solución contiene espacios y lo introducido contiene espacios --> ya veremos
-            if (ok_split.length > 1 && input_split.length == 1){
-                console.log('opcion1');
-                ok_split.forEach(function(item){
-                    input_split.forEach(function(item2){
-                        console.log(item + ' - ' + item2);
-                        if (item == item2 && item.length > 2 && !resultado){
-                            console.log('opcion1-OK');
-                            resultado = true;
-                        }
-                    });
-                });
-            }else if (ok_split.length > 1 && input_split.length == 1 && !resultado){
-                console.log('opcion2');
-                // si la solución contiene espacios y la introducido no
-                ok_split.forEach(function(item,i){
-                    console.log(i+" - " + item);
-                    if (item.indexOf(_valorInput) != -1 ){
-                        resultado = true;
-                    }
-                });
-            }else if(ok_split.length == 1 && input_split.length == 1 && !resultado){
-                console.log('opcion3: '+ _valorOk + "/"+_valorInput);
-                // nada tiene espacios
-                if (_valorOk ===  _valorInput ){
-                    resultado = true;
+                } else if(!correcto &&vm.solucionValida != 1){
+                    console.log('INCORRECTO');
+                   vm.solucionValida = 2;
                 }
             }
-            console.log('delución: ' + resultado)
-            return resultado;
-            //console.log(input_split.length);
         }
+
     }
 ]);
 
