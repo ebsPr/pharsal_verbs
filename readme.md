@@ -9,9 +9,9 @@ Inside the folder dump there is a dump of mongodb database. The database is call
 ___
 
 To execute the aplication, execute inside client folder:
-1. npm install
-1. node server.js
-1. open web browser in localhost:3000
+1.  npm install
+1.  node server.js
+1.  open web browser in localhost:3000
 
 ___
 
