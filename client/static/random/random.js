@@ -65,7 +65,7 @@ angular.module('randomModule', ['ngRoute'])
         // método que valida si lo introducido es correcto
        vm.comprobarSolucion = function ($event) {
             if($event.keyCode == 13){
-                var correcto =Assert.assert(this.pharsalVerb.traduccion,vm.inputVerb);
+                var correcto =Assert.assert(this.pharsalVerb.traduccion,vm.inputVerb,this.pharsalVerb.validacion);
                 console.log('IF: ' + correcto + "/"+this.solucionValida);
                 if ( correcto &&vm.solucionValida != 1 ) {
                     console.log('VALIDO');
