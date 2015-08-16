@@ -16,4 +16,7 @@ angular.module('pharsalVerbs').factory("List", function($resource) {
     });
 });
 
+    angular.module
+
+
 }());

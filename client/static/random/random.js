@@ -7,8 +7,9 @@ angular.module('randomModule', ['ngRoute'])
     .config(['$routeProvider', function($routeProvider) {
         $routeProvider.when('/random.view', {
             templateUrl: 'random/random.html',
-            controller: 'RandomController'
-        });
+            controller: 'RandomController',
+            access: { requiredLogin: true }
+        })
     }]).controller('RandomController', ['$filter','$timeout','Random','Assert',function($filter,$timeout,Random,Assert) {
 
         var vm = this;

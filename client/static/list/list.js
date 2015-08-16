@@ -5,7 +5,8 @@ angular.module('listModule', ['ngRoute'])
     .config(['$routeProvider', function($routeProvider) {
         $routeProvider.when('/list.view', {
             templateUrl: 'list/list.html',
-            controller: 'ListController'
+            controller: 'ListController',
+            access: { requiredLogin: true }
         });
     }]).controller('ListController', ['$filter','$timeout','List',function($filter,$timeout,List) {
 
