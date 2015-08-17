@@ -4,7 +4,7 @@
 
 var MongoClient = require('mongodb').MongoClient;
 
-var mongoUrl = "mongodb://localhost:27017/pharsalVerbs";
+var mongoUrl = "mongodb://"+process.env.database_user+":"+process.env.database_password+"@ds035643.mongolab.com:35643/pharsalverbs";
 var mongoNameCollection = "verbs";
 var mongoCollection = null;
 var mongoDB = null;
